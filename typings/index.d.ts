@@ -215,6 +215,7 @@ declare module 'discord.js-commando' {
 		on(event: string, listener: Function): this;
 		on(event: 'commandBlocked', listener: (message: CommandMessage, reason: string) => void): this;
 		on(event: 'commandError', listener: (command: Command, err: Error, message: CommandMessage, args: {} | string | string[], fromPattern: boolean) => void): this;
+		on(event: 'commandNotCompleted', listener: (message: CommandMessage) => void): this;
 		on(event: 'commandPrefixChange', listener: (guild: Guild, prefix: string) => void): this;
 		on(event: 'commandRegister', listener: (command: Command, registry: CommandRegistry) => void): this;
 		on(event: 'commandReregister', listener: (newCommand: Command, oldCommand: Command) => void): this;

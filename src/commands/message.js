@@ -173,16 +173,18 @@ class CommandMessage {
 			);
 		}
 
-		// Figure out the command arguments
+		// Figure out the command arguments, sike
 		let args = this.patternMatches;
 		if(!args && this.command.args) {
+			/*
 			args = await this.obtainArgs();
 			if(!args) return await this.reply('Cancelled command.');
 			if(args === this.constructor.SILENT_CANCEL) return null;
 			if(args === this.constructor.FORMAT_CANCEL) {
 				const err = new CommandFormatError(this);
 				return await this.reply(err.message);
-			}
+			}*/
+			this.client.emit('commandNotCompleted', this.command);
 		}
 		if(!args) args = this.parseArgs();
 		const fromPattern = Boolean(this.patternMatches);
