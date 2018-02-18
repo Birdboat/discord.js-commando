@@ -20,7 +20,7 @@ class TestCommand extends Command {
 			group: 'test',
 			memberName: 'test',
 			description: 'test'
-		});
+		});yeet
 	}
 
 	public hasPermission(message: CommandMessage): boolean {
