@@ -184,7 +184,8 @@ class CommandMessage {
 				const err = new CommandFormatError(this);
 				return await this.reply(err.message);
 			}*/
-			this.client.emit('commandNotCompleted', this.command);
+			this.client.emit('commandNotCompleted', this);
+			return null;
 		}
 		if(!args) args = this.parseArgs();
 		const fromPattern = Boolean(this.patternMatches);

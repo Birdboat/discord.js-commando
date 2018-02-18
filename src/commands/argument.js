@@ -30,7 +30,7 @@ class CommandArgument {
 		if(!info) throw new Error('The command argument info must be specified.');
 		if(typeof info.key !== 'string') throw new TypeError('Command argument key must be a string.');
 		if(info.label && typeof info.label !== 'string') throw new TypeError('Command argument label must be a string.');
-		if(typeof info.prompt !== 'string') throw new TypeError('Command argument prompt must be a string.');
+		if(info.prompt && typeof info.prompt !== 'string') throw new TypeError('Command argument prompt must be a string.');
 		if(!info.type && !info.validate) {
 			throw new Error('Command argument must have either "type" or "validate" specified.');
 		}

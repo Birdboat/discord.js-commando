@@ -378,7 +378,7 @@ declare module 'discord.js-commando' {
 	type ArgumentInfo = {
 		key: string;
 		label?: string;
-		prompt: string;
+		prompt?: string;
 		type?: string;
 		max?: number;
 		min?: number;
