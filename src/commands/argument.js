@@ -141,26 +141,9 @@ class CommandArgument {
 		let valid = value ? await this.validate(value, msg) : false;
 		let attempts = 0;
 
-		while(!valid || typeof valid === 'string') {
-			attempts++;
-			if(attempts > this.command.argsPromptLimit) return msg.constructor.SILENT_CANCEL;
-			msg.promptCount++;
-
-			await msg.reply(stripIndents`
-				${!value ? this.prompt : valid ? valid : `You provided an invalid ${this.label}. Please try again.`}
-				${oneLine`
-					Respond with \`cancel\` to cancel the command.
-					${wait ? `The command will automatically be cancelled in ${this.wait} seconds.` : ''}
-				`}
-			`);
-
-			const responses = await msg.channel.awaitMessages(msg2 => msg2.author.id === msg.author.id, {
-				maxMatches: 1,
-				time: wait
-			});
-			if(responses && responses.size === 1) value = responses.first().content; else return null;
-			if(value.toLowerCase() === 'cancel') return null;
-			valid = await this.validate(value, msg);
+		if (!valid) {
+			msg.client.emit('commandNotCompleted', msg);
+			return null;
 		}
 
 		return this.parse(value, msg);
